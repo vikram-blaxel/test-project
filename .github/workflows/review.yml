@@ -1,4 +1,4 @@
-name: Notify external service on PR open
+name: review
 
 on:
   pull_request:
@@ -8,11 +8,11 @@ permissions:
   contents: read
 
 jobs:
-  notify:
+  review:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger agent
+      - name: Trigger remote code review agent
         env:
           BLAXEL_API_KEY: ${{ secrets.BLAXEL_API_KEY }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
