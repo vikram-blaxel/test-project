@@ -16,6 +16,7 @@ jobs:
           BLAXEL_API_KEY: ${{ secrets.BLAXEL_API_KEY }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           REPOSITORY: ${{ github.repository }}
+          BASE_REF: ${{ github.base_ref }}
           PR_URL: ${{ github.event.pull_request.html_url }}
         run: |
           curl -X POST "https://agt-github-agent-nb1rct.bl.run/review" \
@@ -23,5 +24,6 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{
               "repository": "'"${REPOSITORY}"'",
-              "pr_number": '"${PR_NUMBER}"'
+              "pr_number": '"${PR_NUMBER}"',
+              "base_ref": '"${BASE_REF}"',
             }'
