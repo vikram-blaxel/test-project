@@ -18,7 +18,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           PR_URL: ${{ github.event.pull_request.html_url }}
         run: |
-          curl -X POST "https://agt-github-agent-nb1rct.bl.run" \
+          curl -X POST "https://agt-github-agent-nb1rct.bl.run/review" \
             -H "Authorization: Bearer ${BLAXEL_API_KEY}" \
             -H "Content-Type: application/json" \
             -d '{
