@@ -1,0 +1,28 @@
+name: Notify external service on PR open
+
+on:
+  pull_request:
+    types: [opened]
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger agent
+        env:
+          BLAXEL_API_KEY: ${{ secrets.BLAXEL_API_KEY }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPOSITORY: ${{ github.repository }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          curl -X POST "https://agt-github-agent-nb1rct.bl.run" \
+            -H "Authorization: Bearer ${BLAXEL_API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "repository": "'"${REPOSITORY}"'",
+              "pr_number": '"${PR_NUMBER}"'
+            }'
