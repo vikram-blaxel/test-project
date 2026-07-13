@@ -9,6 +9,7 @@ TEST_BOOKS = [
     {"title": "Ready Player One", "author": "Ernest Cline"},
 ]
 
+
 class TestMainApp:
     def test_create_app(self, test_app):
         """Test application creation"""
